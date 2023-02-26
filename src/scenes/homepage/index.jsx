@@ -18,7 +18,7 @@ const HomePage = () => {
       >
         {/* first widget */}
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget userId={_id} picturepath={picturePath} />
+          <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
 
         {/* second widget */}
