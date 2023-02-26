@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Box,
@@ -30,7 +29,7 @@ const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-// const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme();
@@ -39,7 +38,7 @@ const Navbar = () => {
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
-  const user = { firstName : "Patrick", lastName : " Cyclo"}
+  //const user = { firstName : "Patrick", lastName : " Cyclo"}
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
@@ -108,9 +107,7 @@ const Navbar = () => {
               <MenuItem value={fullName}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
-              <MenuItem onClick={() => dispatch(setLogout())}>
-                Log Out
-              </MenuItem>
+              <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
