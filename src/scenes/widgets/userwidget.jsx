@@ -25,8 +25,9 @@ const UserWidget = ({ userId, picturePath }) => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, 
     {
       method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {Authorization: `Bearer ${token}` },
     });
+    console.log(response);
     const data = await response.json();
     setUser(data);
     console.log(data);
