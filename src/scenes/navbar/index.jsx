@@ -38,8 +38,8 @@ const Navbar = () => {
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
-  //const user = { firstName : "Patrick", lastName : " Cyclo"}
-  const fullName = `${user.firstName} ${user.lastName}`;
+
+  const fullName = user ? `${user.firstName} ${user.lastName}` : "";
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -56,7 +56,7 @@ const Navbar = () => {
             },
           }}
         >
-          TalkCity
+          talkCity
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -76,7 +76,7 @@ const Navbar = () => {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode())}>
+          <IconButton onClick={() => dispatch(setMode("light" ? "dark" : "light"))}>
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (

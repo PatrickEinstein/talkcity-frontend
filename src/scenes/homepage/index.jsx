@@ -1,12 +1,16 @@
 import { Box, useMediaQuery } from "@mui/material";
+import { useSelector } from "react-redux";
 import Navbar from "scenes/navbar";
 import UserWidget from "scenes/widgets/userwidget";
-import { useSelector } from "react-redux";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidgets";
+import AdvertWidget from "scenes/widgets/AdvertWidget";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
 
 const HomePage = () => {
-  const isNonMobileScreens = useMediaQuery("(min-width:600px)");
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id, picturePath } = useSelector((state) => state.user);
+
   return (
     <Box>
       <Navbar />
@@ -17,24 +21,21 @@ const HomePage = () => {
         gap="0.5rem"
         justifyContent="space-between"
       >
-        {/* first widget */}
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
-
-        {/* second widget */}
         <Box
-          flexBasis={isNonMobileScreens ? "40%" : undefined}
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath ={picturePath} />
-          {/* <UserWidget userId ={_id} picturepath={picturePath}/> */}
+          <MyPostWidget picturePath={picturePath} />
+          <PostsWidget userId={_id} />
         </Box>
-
-        {/* third widget will only show on desktop*/}
         {isNonMobileScreens && (
           <Box flexBasis="26%">
-            {/* <UserWidget userId ={_id} picturepath={picturePath}/> */}
+            <AdvertWidget />
+            <Box m="2rem 0" />
+            <FriendListWidget userId={_id} />
           </Box>
         )}
       </Box>
