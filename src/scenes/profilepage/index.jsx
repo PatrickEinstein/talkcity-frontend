@@ -1,5 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "scenes/navbar";
@@ -7,18 +7,13 @@ import FriendListWidget from "scenes/widgets/FriendListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidgets";
 import UserWidget from "scenes/widgets/userwidget";
-import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState("");
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
-  const loggedInUser = useSelector((state) => state.user);
-  const friends = useSelector((state) => state.user.friends);
-  const { _id, picturePath, ...otherProps } = loggedInUser;
-  const posts = useSelector((state) => state.posts);
-  const dispatch = useDispatch();
-
   const isNonMobileScreens = useMediaQuery("(min-width:600px)");
 
   const getuser = async () => {
@@ -27,20 +22,16 @@ const ProfilePage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    // console.log(data);
-    // setUser(data);
-    console.log(loggedInUser);
-    setUser(loggedInUser);
+
+    console.log(data);
+    setUser(data);
   };
-  //${userId}
+
   useEffect(() => {
-    getuser();
-    if (!loggedInUser) {
-      alert("no loggedin user");
-    } else {
-      alert("logged in user exists");
-    }
-  }, []); //eslint-disabled-line react hooks
+   getuser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!user) return null;
 
   return (
     <Box>
@@ -56,8 +47,8 @@ const ProfilePage = () => {
         {/* first widget for user */}
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <Box m="2rem 0" />
-                <FriendListWidget userId={friends._id} />
-          <UserWidget userId={_id} picturePath={picturePath} />
+          <FriendListWidget userId={userId} />
+          <UserWidget userId={userId} picturePath={user.picturePath} />
         </Box>
 
         {/* second widget for posts*/}
@@ -65,9 +56,9 @@ const ProfilePage = () => {
           flexBasis={isNonMobileScreens ? "40%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={picturePath} />
+          <MyPostWidget picturePath={user.picturePath} />
           <Box m="2rem 0" />
-          <PostsWidget /*userId={posts._id} */ isProfile />
+          <PostsWidget userId={userId} isProfile />
         </Box>
 
         {/* third widget for adverts will only show on desktop*/}
