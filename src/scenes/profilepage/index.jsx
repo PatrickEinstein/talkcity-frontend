@@ -56,7 +56,7 @@ const ProfilePage = () => {
         {/* first widget for user */}
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <Box m="2rem 0" />
-          <FriendListWidget userId={friends._id} />
+                <FriendListWidget userId={friends._id} />
           <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
 
@@ -67,7 +67,7 @@ const ProfilePage = () => {
         >
           <MyPostWidget picturePath={picturePath} />
           <Box m="2rem 0" />
-          <PostsWidget userId={posts._id} isProfile />
+          <PostsWidget /*userId={posts._id} */ isProfile />
         </Box>
 
         {/* third widget for adverts will only show on desktop*/}

@@ -9,7 +9,7 @@ const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
-  const Friends = useSelector((state) => state.user.friends);
+  const friends = useSelector((state) => state.user.friends);
 
   const getFriends = async () => {
     const response = await fetch(
@@ -38,21 +38,18 @@ const FriendListWidget = ({ userId }) => {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {Friends.map(({
-          _id,
-          firstName,
-          lastName,
-          occupation,
-          picturePath
-        }) => (
+        {friends.length ? friends.map((friend) => (
           <Friend
-            key={_id}
-            friendId={_id}
-            name={`${firstName} ${lastName}`}
-            subtitle={occupation}
-            userPicturePath={picturePath}
-          />)
-        )}
+            key={friend._id}
+            friendId={friend._id}
+            name={`${friend.firstName} ${friend.lastName}`}
+            subtitle={friend.occupation}
+            userPicturePath={friend.picturePath}
+          />
+        )) : 
+        <Typography>
+          You have no friends yet
+        </Typography> }
       </Box>
     </WidgetWrapper>
   );
