@@ -70,6 +70,7 @@ const Form = () => {
         body: formData,
       }
     );
+    
     const savedUser = await savedUserResponse.json();
     console.log(savedUser); 
     onSubmitProps.resetForm();
