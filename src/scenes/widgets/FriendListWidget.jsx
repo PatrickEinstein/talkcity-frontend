@@ -14,7 +14,7 @@ const FriendListWidget = ({ userId }) => {
   // const { userId} = useSelector((state) => (state.user));
   const getFriends = async () => {
     const response = await fetch(
-      `https://talkcity-backend-2l9h.vercel.app/users/${userId}/friends`,
+      `http://localhost:3001/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

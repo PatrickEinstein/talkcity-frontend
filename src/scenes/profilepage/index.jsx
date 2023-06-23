@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:600px)");
 
   const getuser = async () => {
-    const response = await fetch(`https://talkcity-backend-2l9h.vercel.app/users/${userId}`, {
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
