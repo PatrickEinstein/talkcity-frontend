@@ -29,10 +29,10 @@ const store = configureStore({
       },
     }),
 });
-console.log(store.getState());
+// console.log(store.getState());
 
-const unsubscribe = store.subscribe(() =>
-console.log('State after dispatch: ', store.getState()));
+// const unsubscribe = store.subscribe(() =>
+// console.log('State after dispatch: ', store.getState()));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

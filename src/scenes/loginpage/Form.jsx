@@ -51,7 +51,7 @@ const Form = () => {
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isNonMobile = useMediaQuery("(min-width:300px)");
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
@@ -67,13 +67,13 @@ const Form = () => {
       "https://talkcity-backend-2l9h.vercel.app/auth/register",
       {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: formData,
       }
     );
-
     const savedUser = await savedUserResponse.json();
-    // console.log(savedUser.msg);
-    alert(savedUserResponse);
+    alert(savedUser.msg);
+    console.log(savedUser);
     onSubmitProps.resetForm();
 
     if (savedUser) {
@@ -91,10 +91,9 @@ const Form = () => {
       }
     );
     const loggedIn = await loggedInResponse.json();
-    // console.log(loggedIn.msg);
-    alert(loggedIn);
+    alert(loggedIn.msg);
+    console.log(loggedIn);
     onSubmitProps.resetForm();
-
     if (loggedIn) {
       dispatch(
         setLogin({
@@ -253,7 +252,6 @@ const Form = () => {
                 color: palette.background.alt,
                 "&:hover": { color: palette.primary.main },
               }}
-              // onClick ={handleFormSubmit}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
