@@ -64,7 +64,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "https://talkcity-backend-2l9h.vercel.app/authentication/register",
+      "https://talkcity-backend-2l9h.vercel.app/auth/register",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "https://talkcity-backend-2l9h.vercel.app/authentication/login",
+      "https://talkcity-backend-2l9h.vercel.app/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
