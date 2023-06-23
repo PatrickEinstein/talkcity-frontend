@@ -70,9 +70,10 @@ const Form = () => {
         body: formData,
       }
     );
-    
+
     const savedUser = await savedUserResponse.json();
-    console.log(savedUser); 
+    console.log(savedUser);
+    alert(savedUserResponse);
     onSubmitProps.resetForm();
 
     if (savedUser) {
@@ -81,15 +82,19 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("https://talkcity-backend-2l9h.vercel.app/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
+    const loggedInResponse = await fetch(
+      "https://talkcity-backend-2l9h.vercel.app/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }
+    );
     const loggedIn = await loggedInResponse.json();
     console.log(loggedIn);
+    alert(loggedIn);
     onSubmitProps.resetForm();
-    
+
     if (loggedIn) {
       dispatch(
         setLogin({
